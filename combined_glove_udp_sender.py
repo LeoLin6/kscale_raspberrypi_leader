@@ -15,9 +15,9 @@ from pykos import KOS
 from pos_input_usb_glove import PosInputUsbGlove as PosInput
 
 # UDP Configuration
-UDP_HOST = "10.33.10.154"  # Target IP - change as needed
+UDP_HOST = "192.168.42.167"  # Target IP - change as needed
 UDP_PORT = 8888
-SEND_RATE = 10.0  # Hz - how often to send data
+SEND_RATE = 32.0  # Hz - how often to send data
 
 # Number of fingers from glove
 NUM_FINGERS = 6
