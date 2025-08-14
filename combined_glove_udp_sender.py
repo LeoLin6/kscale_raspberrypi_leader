@@ -15,12 +15,15 @@ from pykos import KOS
 from pos_input_usb_glove import PosInputUsbGlove as PosInput
 
 # UDP Configuration
-UDP_HOST = "192.168.42.167"  # Target IP - change as needed
+UDP_HOST = "10.33.10.154"  # Target IP - change as needed
 UDP_PORT = 8888
 SEND_RATE = 10.0  # Hz - how often to send data
 
 # Number of fingers from glove
 NUM_FINGERS = 6
+
+# Finger value processing
+FINGER_MAX_VALUE = 65535  # Maximum finger sensor value
 
 class CombinedGloveUDPSender:
     def __init__(self, udp_host=UDP_HOST, udp_port=UDP_PORT, send_rate=SEND_RATE):
@@ -101,7 +104,17 @@ class CombinedGloveUDPSender:
     async def get_finger_positions(self):
         """Get current finger positions from glove"""
         try:
-            self.finger_data = await self.pos_input.get_position()
+            raw_finger_data = await self.pos_input.get_position()
+            
+            # Flip finger values: max_value - current_value
+            # This inverts the finger positions (FINGER_MAX_VALUE - value)
+            flipped_finger_data = []
+            for value in raw_finger_data:
+                flipped_value = FINGER_MAX_VALUE - value
+                flipped_finger_data.append(flipped_value)
+            
+            self.finger_data = flipped_finger_data
+            
         except Exception as e:
             print(f"⚠️ Error getting finger positions: {e}")
             
