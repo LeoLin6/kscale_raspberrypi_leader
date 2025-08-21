@@ -7,33 +7,48 @@ A comprehensive system for controlling bimanual robotic arms using **KOS-ZBot** 
 This repository contains scripts for creating a leader-follower robotic control system where:
 - **Leader arm**: Controlled by OyMotion data gloves and KOS actuator positions
 - **Follower arm**: Receives UDP commands to mirror leader movements
-- **Bimanual coordination**: Simultaneous control of both arms with finger tracking
+
 
 ## To actually teleoperate
 
-**IMPORTANT**: Always disable motor torque to control the leader arms:
+```bash
+#consolidated kos service and disable torque into one bash script
+./start_teleop.sh
+```
+
+**IMPORTANT**: disable motor torque to control the leader arms:
 
 ```bash
+conda activate kos
+# activate kos service
+kos service
+
 # disable all motor torque
 kos actuator torque disable all
 
-# Check motor positions safely
-kos status
+#start combined_udp_sender
+python combined_glove_udp_sender.py
+
 ```
 
-## System Components
+## Installation
+Flash a raspberry pi with the guide here https://github.com/kscalelabs/kos-zbot.git
+There's a image folder, and u can also follow installation.md for detailed instructions. 
+
+Oymotion files and dependencies are at https://github.com/oymotion/roh_demos/tree/main 
+follow their installation guide
+
+
 
 ### Hardware
 - **KScale Robotics ZBot** - Humanoid robot with actuator-controlled joints
 - **OyMotion Data Glove** - USB/BLE glove for finger position sensing
 - **Raspberry Pi** - Running the leader arm control system
-- **Network connection** - UDP communication between leader and follower
 
-### Software Stack
-- **[KOS (K-Scale Operating System)](https://github.com/kscalelabs/kos)** - Robot control framework
-- **[PyKOS](https://github.com/kscalelabs/pykos)** - Python interface for KOS
-- **OyMotion SDK** - Glove data acquisition
-- **UDP networking** - Real-time data transmission
+The 3d printed files are included in the repo: kscale_raspberrypi_leader/Puppet Arms Parts.step 
+
+
+
 
 ## Scripts Description
 
