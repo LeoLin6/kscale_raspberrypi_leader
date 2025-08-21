@@ -47,6 +47,9 @@ follow their installation guide
 
 The 3d printed files are included in the repo: kscale_raspberrypi_leader/Puppet Arms Parts.step 
 
+https://cad.onshape.com/documents/faaf8945fc4d2757ed2b190a/w/17ab7948fd96ef28dfa2d3bd/e/9687f7b2b108762645badeae?renderMode=0&uiState=68a75e3822e9cb1ef7b9a19e 
+
+![Robot with Gloves Connected](images/IMG_5878.jpg)
 
 
 
